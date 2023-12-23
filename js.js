@@ -3,7 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const apiUrl = "https://your-username.github.io/your-repo/get-code/";
 
   // Replace 'code1' with the actual code name you want
-  const codeName = "code1";
+  const codeName = "print("working")
+
+game.Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(char)
+		print(char.Name)
+	end)
+end)";
 
   fetch(apiUrl + codeName)
     .then(response => response.json())
