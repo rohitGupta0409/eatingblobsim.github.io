@@ -13,7 +13,13 @@
     
     <script>
         // Your API response logic here
-        var codeText = "function exampleFunction() {\n    print('Hello from Roblox!');\n}";
+        var codeText = "print("working")
+
+game.Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(char)
+		print(char.Name)
+	end)
+end)";
         document.getElementById("codeTextArea").value = codeText;
     </script>
 </body>
