@@ -7,7 +7,13 @@
   <div id="codeSnippet">
     <pre>
       <code class="lua" id="luaCodePlaceholder">
-        <!-- Lua code will be displayed here -->
+print("working")
+
+game.Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(char)
+		print(char.Name)
+	end)
+end)        
       </code>
     </pre>
   </div>
