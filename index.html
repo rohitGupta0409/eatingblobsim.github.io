@@ -13,12 +13,15 @@
     
     <script>
         // Your API response logic here
-        var codeText = "print(\"working\")\n\n" +
+        var codeText = "// BEGIN_ROBLOX_CODE\n" +
+                       "print(\"working\")\n\n" +
                        "game.Players.PlayerAdded:Connect(function(player)\n" +
                        "    player.CharacterAdded:Connect(function(char)\n" +
                        "        print(char.Name)\n" +
                        "    end)\n" +
-                       "end)";;
+                       "end)\n" +
+                       "// END_ROBLOX_CODE";
+
         document.getElementById("codeTextArea").value = codeText;
     </script>
 </body>
