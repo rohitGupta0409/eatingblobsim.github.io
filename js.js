@@ -1,17 +1,8 @@
-// js.js
+// api.js
+function getCode() {
+    // Retrieve the content of the text area
+    var codeText = document.getElementById("codeTextArea").value;
 
-// Function to return Lua code
-function getLuaCode() {
-  return `
-print("working")
-
-game.Players.PlayerAdded:Connect(function(player)
-	player.CharacterAdded:Connect(function(char)
-		print(char.Name)
-	end)
-end)
-  `;
+    // Return the code as a string
+    return codeText;
 }
-
-// Return the Lua code
-getLuaCode();
