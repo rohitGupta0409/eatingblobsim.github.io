@@ -1,21 +1,20 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Replace 'your-username' and 'your-repo' with your GitHub username and repository name
-  const apiUrl = "https://your-username.github.io/your-repo/get-code/";
+local HttpService = game:GetService("HttpService")
 
-  // Replace 'code1' with the actual code name you want
-  const codeName = "print("working")
+-- Replace 'your-website-url' with the actual URL of your GitHub Pages repository
+local apiUrl = "https://rohitgupta0409.github.io/eatingblobsim.github.io/index.html"
 
-game.Players.PlayerAdded:Connect(function(player)
-	player.CharacterAdded:Connect(function(char)
-		print(char.Name)
-	end)
-end)";
+local success, response = pcall(function()
+    return HttpService:GetAsync(apiUrl)
+end)
 
-  fetch(apiUrl + codeName)
-    .then(response => response.json())
-    .then(data => {
-      const codeResultElement = document.getElementById("codeResult");
-      codeResultElement.textContent = "Code: " + data.code;
-    })
-    .catch(error => console.error("Error fetching code:", error));
-});
+if success then
+    print("Request successful")
+
+    -- Extract the code from the response
+    local codeSnippet = response:match('<code>(.-)</code>')
+
+    print("Code snippet:")
+    print(codeSnippet)
+else
+    print("Request failed:", response)
+end
