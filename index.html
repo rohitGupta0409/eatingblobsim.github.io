@@ -1,23 +1,20 @@
+<!-- api.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ... (your head content) ... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox API Endpoint</title>
+    <script src="api.js"></script>
 </head>
 <body>
-  <div id="codeSnippet">
-    <pre>
-      <code class="lua" id="luaCodePlaceholder">
-print("working")
-
-game.Players.PlayerAdded:Connect(function(player)
-	player.CharacterAdded:Connect(function(char)
-		print(char.Name)
-	end)
-end)        
-      </code>
-    </pre>
-  </div>
-  <script src="js.js"></script>
-  <!-- ... (your body content) ... -->
+    <!-- The content of your API response as a text area -->
+    <textarea id="codeTextArea" style="width: 100%; height: 300px;"></textarea>
+    
+    <script>
+        // Your API response logic here
+        var codeText = "function exampleFunction() {\n    print('Hello from Roblox!');\n}";
+        document.getElementById("codeTextArea").value = codeText;
+    </script>
 </body>
 </html>
