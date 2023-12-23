@@ -13,13 +13,12 @@
     
     <script>
         // Your API response logic here
-        var codeText = "print("working")
-
-game.Players.PlayerAdded:Connect(function(player)
-	player.CharacterAdded:Connect(function(char)
-		print(char.Name)
-	end)
-end)";
+        var codeText = "print(\"working\")\n\n" +
+                       "game.Players.PlayerAdded:Connect(function(player)\n" +
+                       "    player.CharacterAdded:Connect(function(char)\n" +
+                       "        print(char.Name)\n" +
+                       "    end)\n" +
+                       "end)";;
         document.getElementById("codeTextArea").value = codeText;
     </script>
 </body>
