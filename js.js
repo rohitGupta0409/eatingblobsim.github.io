@@ -15,12 +15,12 @@ function extractLuaCode(htmlContent) {
   }
 }
 
-// Fetch the HTML content and extract Lua code
+// Fetch the HTML content and display Lua code
 fetch("index.html")
   .then(response => response.text())
   .then(htmlContent => {
     var luaCode = extractLuaCode(htmlContent);
-    console.log("Lua Code:", luaCode);
+    document.getElementById("luaCodePlaceholder").textContent = luaCode;
 
     // You can perform further actions with the Lua code here
   })
