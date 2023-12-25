@@ -29,6 +29,7 @@ local PlayersKill =DS:GetOrderedDataStore("PlayersKill")
 local CoinSound = SS:WaitForChild("Coin")
 
 local playersScoreFold = ss:WaitForChild("PlayersScoreFol")
+local DIsablePlayButtonsBool = RPS:WaitForChild("UIValues").DIsablePlayButtons
 
 local BotsFol = workspace:WaitForChild("Bots")
 
@@ -43,7 +44,7 @@ local RankShareRE = RPS.UIEvents.RankShare
 local VIPCheckRe = RPS.UIEvents.VIPCheck
 
 
-local GoldMultiply, SizeMultiply, ingameVIPpassPurhcaseSuccess, ingameMagnetarpassPurhcaseSuccess, newPlayerKillsScoresTable
+local GoldMultiply, SizeMultiply, ingameVIPpassPurhcaseSuccess, ingameMagnetarpassPurhcaseSuccess, newPlayerSizeScoresTableBG, newPlayerSizeScoresTable
 local inGameGoldPass, inGameSizePass
 
 local SoulModule = require(ss:WaitForChild("Modules").Soul)
@@ -57,7 +58,7 @@ for i =1, 3 do
 			
 			if spawnLocation.Name == "SpawnArea2" or "SpawnArea3" then
 				
-				local total = spawnLocation.Name == "SpawnArea2" and math.random(2500,3000) or math.random(1500,2000)
+				local total = spawnLocation.Name == "SpawnArea2" and math.random(5000,5500) or math.random(2500,3000)
 
 				for i = 0, total,1 do
 
@@ -76,9 +77,9 @@ for i =1, 3 do
 					
 					if spawnLocation.Name == "SpawnArea2" then
 						
-						offset = Vector3.new(math.random(-228,228), 0, math.random(-254,254))
+						offset = Vector3.new(math.random(-290,290), 0, math.random(-335,335))
 					else
-						offset = Vector3.new(math.random(-156,156),0,math.random(-228,228))
+						offset = Vector3.new(math.random(-255,255),0,math.random(-320,320))
 					end
 
 					eatingBlobs.Size = eatingBlobs.Size + (eatingBlobs.Size * math.random(0.25,0.75))
@@ -95,10 +96,10 @@ for i =1, 3 do
 			
 			for _, spawnLocation in ipairs(SpawnAreaBG:GetChildren()) do
 				
-				if spawnLocation.Name == "SpawnAreaBG2" then
+				if spawnLocation.Name == "SpawnAreaBG2" or "SpawnAreaBG1" or "SpawnAreaBG3" then
 					
-					
-					for i = 0, math.random(2500,3500) do
+					local total = spawnLocation.Name == "SpawnAreaBG2" and math.random(5000,5500) or math.random(2500,3000)
+					for i = 0, total do
 						
 						local eatingBlobs = game.ReplicatedStorage.eatingblobs:Clone()
 						eatingBlobs.Name = i
@@ -114,67 +115,43 @@ for i =1, 3 do
 						local offset
 
 						if spawnLocation.Name == "SpawnAreaBG1" then
-							offset = Vector3.new(math.random(-140,140),0,math.random(-140,140))
+							offset = Vector3.new(math.random(-205,205),0,math.random(-180,180))
 						elseif spawnLocation.Name == "SpawnAreaBG2" then
-							offset = Vector3.new(math.random(-252,252),0,math.random(-222,222))
+							offset = Vector3.new(math.random(-320,320),0,math.random(-335,335))
 						elseif spawnLocation.Name == "SpawnAreaBG3" then
-							offset = Vector3.new(math.random(-153,153),0,math.random(-116,116))	
+							offset = Vector3.new(math.random(-215,215),0,math.random(-190,190))	
 						end
 
 						eatingBlobs.Size = eatingBlobs.Size + (eatingBlobs.Size * math.random(0.25,0.75))
 						eatingBlobs.CFrame = spawnLocation.CFrame + offset
 						eatingBlobs.CFrame = CFrame.new(eatingBlobs.CFrame.X,ReferncePartBG.CFrame.Y,eatingBlobs.CFrame.Z)
-					end
-				else
-					for i = 0, math.random(1500,2500) do
-						
-						local eatingBlobs = game.ReplicatedStorage.eatingblobs:Clone()
-						eatingBlobs.Name = i
-						eatingBlobs.Anchored = true
-						eatingBlobs.CanCollide = false
-						eatingBlobs.Parent = EatingBlobsVIP
-
-						local r, g, b = math.random(0, 255), math.random(0, 255), math.random(0, 255);
-						local color = Color3.fromRGB(r, g, b);
-
-						eatingBlobs.Color = color
-
-						local offset
-
-						if spawnLocation.Name == "SpawnAreaBG1" then
-							offset = Vector3.new(math.random(-140,140),0,math.random(-140,140))
-						elseif spawnLocation.Name == "SpawnAreaBG2" then
-							offset = Vector3.new(math.random(-252,252),0,math.random(-222,222))
-						elseif spawnLocation.Name == "SpawnAreaBG3" then
-							offset = Vector3.new(math.random(-153,153),0,math.random(-116,116))	
-						end
-
-						eatingBlobs.Size = eatingBlobs.Size + (eatingBlobs.Size * math.random(0.25,0.75))
-						eatingBlobs.CFrame = spawnLocation.CFrame + offset
-						eatingBlobs.CFrame = CFrame.new(eatingBlobs.CFrame.X,ReferncePartBG.CFrame.Y,eatingBlobs.CFrame.Z)
+						CS:AddTag(eatingBlobs,"Blob")
 					end
 				end
 			end
 		else
-			print("vip spawn blobs")
-			for i = 1, math.random(1500,2000) do
+			if i == 3 then
 				
-				local eatingBlobs = game.ReplicatedStorage.eatingblobs:Clone()
-				eatingBlobs.Name = i
-				eatingBlobs.Anchored = true
-				eatingBlobs.CanCollide = false
-				eatingBlobs.Parent = EatingBlobsFol
+				for i = 1, math.random(3000,3500) do
 
-				local r, g, b = math.random(0, 255), math.random(0, 255), math.random(0, 255);
-				local color = Color3.fromRGB(r, g, b);
+					local eatingBlobs = game.ReplicatedStorage.eatingblobs:Clone()
+					eatingBlobs.Name = i
+					eatingBlobs.Anchored = true
+					eatingBlobs.CanCollide = false
+					eatingBlobs.Parent = EatingBlobsVIP
 
-				eatingBlobs.Color = color
+					local r, g, b = math.random(0, 255), math.random(0, 255), math.random(0, 255);
+					local color = Color3.fromRGB(r, g, b);
 
-				local offset = Vector3.new(math.random(-187,187),0,math.random(-121,121))
-				
-				eatingBlobs.Size = eatingBlobs.Size + (eatingBlobs.Size * math.random(0.25,0.75))
-				eatingBlobs.CFrame = VIpSpawn.CFrame + offset
-				eatingBlobs.CFrame = CFrame.new(eatingBlobs.CFrame.X,ReferncePartVIP.CFrame.Y,eatingBlobs.CFrame.Z)
+					eatingBlobs.Color = color
+
+					local offset = Vector3.new(math.random(-187,187),0,math.random(-121,121))
+
+					eatingBlobs.Size = eatingBlobs.Size + (eatingBlobs.Size * math.random(0.25,0.75))
+					eatingBlobs.CFrame = VIpSpawn.CFrame + offset
+					eatingBlobs.CFrame = CFrame.new(eatingBlobs.CFrame.X,ReferncePartVIP.CFrame.Y,eatingBlobs.CFrame.Z)
+					CS:AddTag(eatingBlobs,"Blob")
+				end
 			end
 		end
 	end
@@ -223,7 +200,7 @@ local function CollectBlobs(char)
 			local Size
 			
 			
-			if playerSizeInt.Value > 10000 then
+			if playerSizeInt.Value > 0000 then
 				Size = SizeInc * 0.00005
 			elseif playerSizeInt.Value > 3100 then
 				Size = .002 * SizeInc
@@ -316,7 +293,6 @@ local function CollectBlobs(char)
 							
 							if Error then
 								
-								print("Bot Cant Be destroyed Because of "..Error)
 								return
 							end
 
@@ -335,7 +311,9 @@ local function CollectBlobs(char)
 							
 							local Size
 							
-							if PlayerSize.Value >= 1000 then
+							if PlayerSize.Value >= 100000 then
+								Size = hitSize.Value * .0001
+							elseif PlayerSize.Value >= 10000 then
 								Size = hitSize.Value * .001
 							elseif PlayerSize.Value >= 5000 and PlayerSize.Value <10000 then
 								Size = hitSize.Value * .001
@@ -346,7 +324,6 @@ local function CollectBlobs(char)
 								if Size > 6 then
 									Size = 6
 								end
-								print(Size)
 							elseif PlayerSize.Value <= 2000 and PlayerSize.Value >= 1500 then
 								Size = hitSize.Value * .003
 							elseif PlayerSize.Value <= 1500 and PlayerSize.Value >= 1000 then
@@ -391,7 +368,6 @@ local function CollectBlobs(char)
 					else
 						pcall(function()
 							hit.Parent:Destroy()
-							print("Error bot deleted by player")
 						end)
 					end
 				else
@@ -404,7 +380,7 @@ local function CollectBlobs(char)
 					if CheckPlayer then
 						
 						local Shield = hit.Shield
-						if Shield.Value == true then print("shield true") return end
+						if Shield.Value == true then return end
 						
 						local playerScoreInt = ss.PlayersScoreFol:FindFirstChild(PlayerBlob.Parent.Name):FindFirstChild("Score")
 						local playerSizeInt = ss.PlayersScoreFol:FindFirstChild(PlayerBlob.Parent.Name):FindFirstChild("Size")
@@ -438,10 +414,19 @@ local function CollectBlobs(char)
 
 							local Size
 
-							if PlayerSize.Value >= 2300 then
-								Size = .2
+							if PlayerSize.Value >= 100000 then
+								Size = hitSize.Value * .0001
+							elseif PlayerSize.Value >= 10000 then
+								Size = hitSize.Value * .001
+							elseif PlayerSize.Value >= 5000 and PlayerSize.Value <10000 then
+								Size = hitSize.Value * .001
+							elseif PlayerSize.Value >= 2300 and PlayerSize.Value <= 5000 then
+								Size = hitSize.Value * .005
 							elseif PlayerSize.Value <= 2300 and PlayerSize.Value >= 2000 then
-								Size = hitSize.Value * .03
+								Size = hitSize.Value * .01
+								if Size > 6 then
+									Size = 6
+								end
 							elseif PlayerSize.Value <= 2000 and PlayerSize.Value >= 1500 then
 								Size = hitSize.Value * .003
 							elseif PlayerSize.Value <= 1500 and PlayerSize.Value >= 1000 then
@@ -456,13 +441,6 @@ local function CollectBlobs(char)
 								Size = hitSize.Value * .022
 							elseif PlayerSize.Value <= 50 and PlayerSize.Value >= 0 then
 								Size = hitSize.Value * .044						
-							end					
-							if playerSizeInt.Value >= 1000 then
-								char.Humanoid.WalkSpeed = 12
-							elseif playerSizeInt.Value >= 500 then
-								char.Humanoid.WalkSpeed = 14
-							elseif playerSizeInt.Value >= 200 then
-								char.Humanoid.WalkSpeed = 16
 							end
 							
 							local SpawnShield = PlayerBlob:FindFirstChild("SpawnShield")
@@ -483,8 +461,6 @@ local function CollectBlobs(char)
 	
 							end)
 						end
-					else
-						print("not a desendat bot")
 					end
 				end
 			end
@@ -647,8 +623,9 @@ EatingBlobsVIP.ChildRemoved:Connect(function(child)
 	return
 end)
 
-local function ReceiveRank(PlayerKillsScoresTable)
-	newPlayerKillsScoresTable = PlayerKillsScoresTable
+local function ReceiveRank(PlayerSizeScoresTable,PlayerSizeScoresTableBG)
+	newPlayerSizeScoresTableBG = PlayerSizeScoresTableBG
+	newPlayerSizeScoresTable = PlayerSizeScoresTable
 end
 
 RankShareRE.Event:Connect(ReceiveRank)
@@ -674,28 +651,39 @@ local function createScoreTag(char)
 
 		if success then
 			
-			if newPlayerKillsScoresTable then
-				for rank, v in ipairs(newPlayerKillsScoresTable) do
+			if newPlayerSizeScoresTableBG or newPlayerSizeScoresTable then
+				
+				local GroundType
+				
+				pcall(function()
+					GroundType = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("GroundType")
+				end)
+				
+				if GroundType then
 					
-					if v.Key == player.UserId then
-						if rank > 3 then
-							Scoretag.RankText.Visible = true
-							Scoretag.RankText.Text = rank
-							Scoretag.RankImage.Visible = false
-						else
-							Scoretag.RankText.Visible = false
-							local RankImage = Scoretag.RankImage
-							RankImage.Visible = true
-							if rank == 1 then
-								RankImage.Image = "rbxassetid://15715300181"
-							elseif rank == 2 then
-								RankImage.Image = "rbxassetid://15715307415"
+					local checks = GroundType.Value == "MG" and newPlayerSizeScoresTable or newPlayerSizeScoresTableBG
+					for rank, v in ipairs(checks) do
+
+						if v.Key == player.UserId then
+							if rank > 3 then
+								Scoretag.RankText.Visible = true
+								Scoretag.RankText.Text = rank
+								Scoretag.RankImage.Visible = false
 							else
-								RankImage.Image = "rbxassetid://15715311329"
+								Scoretag.RankText.Visible = false
+								local RankImage = Scoretag.RankImage
+								RankImage.Visible = true
+								if rank == 1 then
+									RankImage.Image = "rbxassetid://15715300181"
+								elseif rank == 2 then
+									RankImage.Image = "rbxassetid://15715307415"
+								else
+									RankImage.Image = "rbxassetid://15715311329"
+								end
 							end
 						end
-					end
-				end 
+					end 
+				end
 			end
 			Scoretag.Score.Text = playerSizeInt.Value
 		else
@@ -706,6 +694,7 @@ end
 
 local function PlaySpawn(player,Type)
 	
+	DIsablePlayButtonsBool.Value = false
 	local CanSetSize = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("CanSetSize")
 	CanSetSize.Value = false
 	
@@ -736,7 +725,6 @@ local function PlaySpawn(player,Type)
 	end)	
 	
 	if not Success then
-		print("not success")
 		player:LoadCharacter()
 		playerBlob = player.Character:FindFirstChild(player.Name)
 	end
@@ -830,6 +818,7 @@ end
 
 local function PlayRespawn(player,Type)
 	
+	DIsablePlayButtonsBool.Value = false
 	local Hum = player.Character.Humanoid
 	Hum.WalkSpeed = 18
 	
@@ -915,7 +904,7 @@ end
 
 local function PlayerRevive(player,Type)
 	
-
+	DIsablePlayButtonsBool.Value = false
 	local GroundType = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("GroundType")
 	GroundType.Value = Type
 	
@@ -981,13 +970,10 @@ local function PlayerRevive(player,Type)
 	return
 end
 
-
 ---GamePass Check
 
 local function VIPcheck(player)
 	
-	print("checking pass")
-	print(ingameVIPpassPurhcaseSuccess)
 	if MPS:UserOwnsGamePassAsync(player.UserId,665386971) or ingameVIPpassPurhcaseSuccess then
 		
 		local Shield = player.Character:FindFirstChild(player.Name).Shield
@@ -1172,7 +1158,6 @@ function PlayerGamePass(player)
 	
 	if VIPPass and HasVIPPass or ingameVIPpassPurhcaseSuccess then
 		
-		print("now have VIP pass")
 		SizeMultiply = 2
 		GoldMultiply = 2
 		
@@ -1205,9 +1190,7 @@ PlayRE.OnServerEvent:Connect(PlaySpawn)
 RevivedRE.OnServerEvent:Connect(PlayerRevive)
 DeathPlayRE.OnServerEvent:Connect(PlayRespawn)
 PassPurchaseRE.OnServerEvent:Connect(function(player,ID)
-	
-	print(ID)
-	print("pass purchase complete")
+
 	if ID == 665853189 then
 		inGameGoldPass = 2
 		PlayerGamePass(player)
@@ -1219,15 +1202,12 @@ PassPurchaseRE.OnServerEvent:Connect(function(player,ID)
 		PlayerGamePass(player)
 	elseif ID == 665386971 then
 		ingameVIPpassPurhcaseSuccess = true
-		print(ingameVIPpassPurhcaseSuccess)
 		PlayerGamePass(player)
 	end
 end)
 
 local function onPlayerAdd(player)
 	
-	print("player added")
-
 	local TotalSize = ss.PlayersScoreFol:WaitForChild(player.Name):FindFirstChild("TotalSize")
 	local TotalKills = ss.PlayersScoreFol:WaitForChild(player.Name):FindFirstChild("TotalKills")
 
@@ -1253,7 +1233,8 @@ local function onPlayerAdd(player)
 
 			return PlayersKill:GetAsync(Key)
 		end)
-
+		
+		print("total kill created")
 		TotalKills.Value = PlayerTotalKills
 	end
 
@@ -1282,11 +1263,12 @@ game.Players.PlayerAdded:Connect(function(player)
 	onPlayerAdd(player)
 end)
 
-local function RunOnce()
+
+local function onServeCreate()
 	
-	for _, player in pairs(game.Players:GetPlayers()) do
+	for _, player in ipairs(Player:GetChildren()) do
 		onPlayerAdd(player)
 	end
 end
 
-RunOnce()
+onServeCreate()
