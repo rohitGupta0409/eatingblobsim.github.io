@@ -695,7 +695,7 @@ local function PlaySpawn(player,Type)
 
 	local DIsablePlayButtonsBool = RPS:FindFirstChild("PlayerScoreFoldRPS"):FindFirstChild(player.Name):FindFirstChild("DIsablePlayButtons")
 	DIsablePlayButtonsBool.Value = false
-	
+
 	local CanSetSize = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("CanSetSize")
 	CanSetSize.Value = false
 
@@ -821,7 +821,7 @@ local function PlayRespawn(player,Type)
 
 	local DIsablePlayButtonsBool = RPS:FindFirstChild("PlayerScoreFoldRPS"):FindFirstChild(player.Name):FindFirstChild("DIsablePlayButtons")
 	DIsablePlayButtonsBool.Value = false
-	
+
 	local Hum = player.Character.Humanoid
 	Hum.WalkSpeed = 18
 
@@ -909,7 +909,7 @@ local function PlayerRevive(player,Type)
 
 	local DIsablePlayButtonsBool = RPS:FindFirstChild("PlayerScoreFoldRPS"):FindFirstChild(player.Name):FindFirstChild("DIsablePlayButtons")
 	DIsablePlayButtonsBool.Value = false
-	
+
 	local GroundType = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("GroundType")
 	GroundType.Value = Type
 
@@ -1262,6 +1262,11 @@ local function onPlayerAdd(player)
 	CollectBlobs(char)	
 
 end
+
+game.Players.PlayerRemoving:Connect(function(player)
+	
+	RPS.PlayerScoreFoldRPS:FindFirstChild(player.Name):Destroy()
+end)
 
 game.Players.PlayerAdded:Connect(function(player)
 
