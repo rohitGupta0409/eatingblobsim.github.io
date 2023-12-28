@@ -26,8 +26,6 @@ local RS = game:GetService("RunService")
 local PlayersSize = DS:GetOrderedDataStore("PlayersSize")
 local PlayersKill =DS:GetOrderedDataStore("PlayersKill")
 
-local CoinSound = SS:WaitForChild("Coin")
-
 local playersScoreFold = ss:WaitForChild("PlayersScoreFol")
 
 local BotsFol = workspace:WaitForChild("Bots")
@@ -181,7 +179,6 @@ local function CollectBlobs(char)
 			local playerSizeInt = ss.PlayersScoreFol:FindFirstChild(PlayerBlob.Parent.Name):FindFirstChild("Size")
 
 
-			CoinSound:Play()
 			local EatingBlobTween = Ts:Create(hit,TweenInfo.new(0.2,Enum.EasingStyle.Linear,Enum.EasingDirection.Out),{Size = hit.Size - hit.Size})
 			EatingBlobTween:Play()
 
@@ -1264,7 +1261,7 @@ local function onPlayerAdd(player)
 end
 
 game.Players.PlayerRemoving:Connect(function(player)
-	
+
 	RPS.PlayerScoreFoldRPS:FindFirstChild(player.Name):Destroy()
 end)
 
