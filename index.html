@@ -173,7 +173,7 @@ local function CollectBlobs(char)
 
 		if hit.Name == "SpawnArea" then return end
 
-		if hit:IsDescendantOf(EatingBlobsFol) or hit:IsDescendantOf(EatingBlobsFolBG) then
+		if hit:IsDescendantOf(EatingBlobsFol) or hit:IsDescendantOf(EatingBlobsFolBG) or hit:IsDescendantOf(EatingBlobsVIP) then
 
 			local playerScoreInt = ss.PlayersScoreFol:FindFirstChild(PlayerBlob.Parent.Name):FindFirstChild("Score")
 			local playerSizeInt = ss.PlayersScoreFol:FindFirstChild(PlayerBlob.Parent.Name):FindFirstChild("Size")
@@ -1067,7 +1067,6 @@ function PlayerGamePass(player)
 		local playerSizeInt = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("Size")
 
 
-		CoinSound:Play()
 		local EatingBlobTween = Ts:Create(hit,TweenInfo.new(0.2,Enum.EasingStyle.Linear,Enum.EasingDirection.Out),{Size = hit.Size - hit.Size})
 		EatingBlobTween:Play()
 
@@ -1149,7 +1148,7 @@ function PlayerGamePass(player)
 
 		MagneticSpace.Touched:Connect(function(hit)
 
-			if hit:IsDescendantOf(EatingBlobsFol) or hit:IsDescendantOf(EatingBlobsFolBG) then
+			if hit:IsDescendantOf(EatingBlobsFol) or hit:IsDescendantOf(EatingBlobsFolBG) or hit:IsDescendantOf(EatingBlobsVIP) then
 
 				Ts:Create(hit,TweenInfo.new(0.5,Enum.EasingStyle.Linear,Enum.EasingDirection.Out),{Position = playerBlob.Position}):Play()
 				EatingBlobForMagnetar(player,hit,playerBlob,MagneticSpace)
@@ -1179,7 +1178,7 @@ function PlayerGamePass(player)
 
 		MagneticSpace.Touched:Connect(function(hit)
 
-			if hit:IsDescendantOf(EatingBlobsFol) then
+			if hit:IsDescendantOf(EatingBlobsFol) or hit:IsDescendantOf(EatingBlobsVIP) then
 
 				Ts:Create(hit,TweenInfo.new(0.5,Enum.EasingStyle.Linear,Enum.EasingDirection.Out),{Position = playerBlob.Position}):Play()
 				EatingBlobForMagnetar(player,hit,playerBlob,MagneticSpace)
