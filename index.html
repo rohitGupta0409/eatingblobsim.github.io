@@ -689,7 +689,7 @@ local function createScoreTag(char)
 end
 
 local function PlaySpawn(player,Type)
-		
+
 	local camera = workspace:FindFirstChild("Camera")
 	local DIsablePlayButtonsBool = RPS:FindFirstChild("PlayerScoreFoldRPS"):FindFirstChild(player.Name):FindFirstChild("DIsablePlayButtons")
 	DIsablePlayButtonsBool.Value = false
@@ -699,7 +699,7 @@ local function PlaySpawn(player,Type)
 
 	local Hum = player.Character.Humanoid
 	Hum.WalkSpeed = 18
-	
+
 	local playerScoresFold = ss.PlayersScoreFol:FindFirstChild(player.Name)
 
 	local GroundType = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("GroundType")
@@ -726,7 +726,7 @@ local function PlaySpawn(player,Type)
 		player:LoadCharacter()
 		playerBlob = player.Character:FindFirstChild(player.Name)
 	end
-	
+
 	if camera then
 		camera.CameraType = Enum.CameraType.Custom
 		camera.CameraSubject = Hum
@@ -818,7 +818,7 @@ local function PlaySpawn(player,Type)
 end
 
 local function PlayRespawn(player,Type,camera)
-	
+
 	local camera = workspace:FindFirstChild("Camera")
 
 	local DIsablePlayButtonsBool = RPS:FindFirstChild("PlayerScoreFoldRPS"):FindFirstChild(player.Name):FindFirstChild("DIsablePlayButtons")
@@ -826,7 +826,7 @@ local function PlayRespawn(player,Type,camera)
 
 	local Hum = player.Character.Humanoid
 	Hum.WalkSpeed = 18
-	
+
 	local GroundType = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("GroundType")
 	GroundType.Value = Type
 
@@ -853,7 +853,7 @@ local function PlayRespawn(player,Type,camera)
 	local success = pcall(function()
 		playerBlob.Size = Vector3.new(2,2,2)
 	end)
-	
+
 	if camera then
 		camera.CameraType = Enum.CameraType.Custom
 		camera.CameraSubject = Hum
@@ -913,7 +913,7 @@ local function PlayRespawn(player,Type,camera)
 end
 
 local function PlayerRevive(player,Type)
-	
+
 	local Hum = player.Character.Humanoid
 	local camera = workspace:FindFirstChild("Camera")
 
@@ -930,7 +930,7 @@ local function PlayerRevive(player,Type)
 	CanSetSize.Value = true
 
 	player:LoadCharacter()
-	
+
 	if camera then
 		camera.CameraType = Enum.CameraType.Custom
 		camera.CameraSubject = Hum
@@ -1021,22 +1021,22 @@ function PlayerGamePass(player)
 
 	local Gold, HasGoldPass = pcall(function()
 
-		return MPS:UserOwnsGamePassAsync(player.UserId,665853189)
+		return MPS:UserOwnsGamePassAsync(player.UserId,665853189) or MPS:UserOwnsGamePassAsync(player.UserId,679994168)
 	end)
 
 	local Size, HasSizePass = pcall(function()
 
-		return MPS:UserOwnsGamePassAsync(player.UserId,667314694)
+		return MPS:UserOwnsGamePassAsync(player.UserId,667314694) or MPS:UserOwnsGamePassAsync(player.UserId,679748521)
 	end)
 
 	local Magnetar, HasMagnetarPass = pcall(function()
 
-		return MPS:UserOwnsGamePassAsync(player.UserId,665944144)
+		return MPS:UserOwnsGamePassAsync(player.UserId,665944144) or MPS:UserOwnsGamePassAsync(player.UserId,679814411)
 	end)
 
 	local VIPPass, HasVIPPass = pcall(function()
 
-		return MPS:UserOwnsGamePassAsync(player.UserId,665386971)
+		return MPS:UserOwnsGamePassAsync(player.UserId,665386971) or MPS:UserOwnsGamePassAsync(player.UserId,679470999)
 	end)
 
 	if Gold and HasGoldPass then
@@ -1210,16 +1210,16 @@ RevivedRE.OnServerEvent:Connect(PlayerRevive)
 DeathPlayRE.OnServerEvent:Connect(PlayRespawn)
 PassPurchaseRE.OnServerEvent:Connect(function(player,ID)
 
-	if ID == 665853189 then
+	if ID == 679994168 then
 		inGameGoldPass = 2
 		PlayerGamePass(player)
-	elseif ID == 667314694 then
+	elseif ID == 679748521 then
 		inGameSizePass = 2
 		PlayerGamePass(player)
-	elseif ID == 665944144 then
+	elseif ID == 679814411 then
 		ingameMagnetarpassPurhcaseSuccess = true
 		PlayerGamePass(player)
-	elseif ID == 665386971 then
+	elseif ID == 679470999 then
 		ingameVIPpassPurhcaseSuccess = true
 		PlayerGamePass(player)
 	end
