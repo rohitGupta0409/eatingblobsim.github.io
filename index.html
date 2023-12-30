@@ -689,7 +689,8 @@ local function createScoreTag(char)
 end
 
 local function PlaySpawn(player,Type)
-
+		
+	local camera = workspace:FindFirstChild("Camera")
 	local DIsablePlayButtonsBool = RPS:FindFirstChild("PlayerScoreFoldRPS"):FindFirstChild(player.Name):FindFirstChild("DIsablePlayButtons")
 	DIsablePlayButtonsBool.Value = false
 
@@ -698,8 +699,7 @@ local function PlaySpawn(player,Type)
 
 	local Hum = player.Character.Humanoid
 	Hum.WalkSpeed = 18
-
-
+	
 	local playerScoresFold = ss.PlayersScoreFol:FindFirstChild(player.Name)
 
 	local GroundType = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("GroundType")
@@ -726,8 +726,11 @@ local function PlaySpawn(player,Type)
 		player:LoadCharacter()
 		playerBlob = player.Character:FindFirstChild(player.Name)
 	end
-
-
+	
+	if camera then
+		camera.CameraType = Enum.CameraType.Custom
+		camera.CameraSubject = Hum
+	end
 	local SpawnShield = playerBlob:FindFirstChild("SpawnShield")
 
 	if SpawnShield then
@@ -814,14 +817,16 @@ local function PlaySpawn(player,Type)
 	return
 end
 
-local function PlayRespawn(player,Type)
+local function PlayRespawn(player,Type,camera)
+	
+	local camera = workspace:FindFirstChild("Camera")
 
 	local DIsablePlayButtonsBool = RPS:FindFirstChild("PlayerScoreFoldRPS"):FindFirstChild(player.Name):FindFirstChild("DIsablePlayButtons")
 	DIsablePlayButtonsBool.Value = false
 
 	local Hum = player.Character.Humanoid
 	Hum.WalkSpeed = 18
-
+	
 	local GroundType = ss.PlayersScoreFol:FindFirstChild(player.Name):FindFirstChild("GroundType")
 	GroundType.Value = Type
 
@@ -848,7 +853,12 @@ local function PlayRespawn(player,Type)
 	local success = pcall(function()
 		playerBlob.Size = Vector3.new(2,2,2)
 	end)
-
+	
+	if camera then
+		camera.CameraType = Enum.CameraType.Custom
+		camera.CameraSubject = Hum
+		print("camera set")
+	end
 	local SpawnShield = playerBlob:FindFirstChild("SpawnShield")
 	SpawnShield.Transparency = 0
 
@@ -903,6 +913,9 @@ local function PlayRespawn(player,Type)
 end
 
 local function PlayerRevive(player,Type)
+	
+	local Hum = player.Character.Humanoid
+	local camera = workspace:FindFirstChild("Camera")
 
 	local DIsablePlayButtonsBool = RPS:FindFirstChild("PlayerScoreFoldRPS"):FindFirstChild(player.Name):FindFirstChild("DIsablePlayButtons")
 	DIsablePlayButtonsBool.Value = false
@@ -917,6 +930,11 @@ local function PlayerRevive(player,Type)
 	CanSetSize.Value = true
 
 	player:LoadCharacter()
+	
+	if camera then
+		camera.CameraType = Enum.CameraType.Custom
+		camera.CameraSubject = Hum
+	end
 
 	local playerBlob = player.Character:FindFirstChild(player.Name)
 
