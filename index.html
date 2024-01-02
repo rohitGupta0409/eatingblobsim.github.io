@@ -194,10 +194,19 @@ local function CollectBlobs(char)
 			ScoreRE:Fire(player, "EatingBlob", char, nil, SizeMultiply, GoldMultiply, inGameGoldPass,inGameSizePass,SizeInc)
 
 			local Size
-
-
-			if playerSizeInt.Value > 10000 then
-				Size = SizeInc * 0.00005
+			
+			if playerSizeInt.Value >= 1000000000 then
+				Size = SizeInc * .00000000001
+			elseif playerSizeInt.Value >= 100000000 then
+				Size = SizeInc * .0000000001
+			elseif playerSizeInt.Value >= 1000000 then
+				Size = SizeInc * .00000001
+			elseif playerSizeInt.Value > 200000 then
+				Size = SizeInc * .0000001
+			elseif playerSizeInt.Value > 100000 then
+				Size = SizeInc * .000001
+			elseif playerSizeInt.Value > 10000 then
+				Size = SizeInc * 0.000005
 			elseif playerSizeInt.Value > 3100 then
 				Size = .002 * SizeInc
 			elseif playerSizeInt.Value > 3000 then
@@ -306,9 +315,13 @@ local function CollectBlobs(char)
 							TotalKills.Value += 1
 
 							local Size
-
-							if PlayerSize.Value >= 100000 then
-								Size = hitSize.Value * .0001
+							
+							if PlayerSize.Value >= 1000000 then
+								Size = hitSize.Value * .00000001
+							elseif PlayerSize.Value >= 200000 then
+								Size = hitSize.Value * .0000001
+							elseif PlayerSize.Value >= 100000 then
+								Size = hitSize.Value * .000001
 							elseif PlayerSize.Value >= 10000 then
 								Size = hitSize.Value * .001
 							elseif PlayerSize.Value >= 5000 and PlayerSize.Value <10000 then
